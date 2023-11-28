@@ -36,9 +36,9 @@ namespace FinalProject.Views
 
             ProductReceivesDataGrid.ItemsSource = ProductsReceive;
             ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Номер поступления", Binding = new Binding("Id") });
-            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Поставщик", Binding = new Binding("Supplier") });
-            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Склад", Binding = new Binding("Warehouse") });
-            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Товар", Binding = new Binding("Product") });
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Поставщик", Binding = new Binding("SupplierId") });
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Склад", Binding = new Binding("WarehouseId") });
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Товар", Binding = new Binding("ProductId") });
             ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Кол-во товара", Binding = new Binding("Quantity") });
             ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Дата поступления", Binding = new Binding("DateOfReceive") });
         }

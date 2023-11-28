@@ -82,8 +82,20 @@
     <Compile Include="Controls\NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202311281734356_kekW.cs" />
+    <Compile Include="Migrations\202311281734356_kekW.designer.cs">
+      <DependentUpon>202311281734356_kekW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202311281739480_kekW1.cs" />
+    <Compile Include="Migrations\202311281739480_kekW1.designer.cs">
+      <DependentUpon>202311281739480_kekW1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202311281754575_kekW2.cs" />
+    <Compile Include="Migrations\202311281754575_kekW2.designer.cs">
+      <DependentUpon>202311281754575_kekW2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ModelObject.cs" />
+    <Compile Include="Models\IEntity.cs" />
     <Compile Include="Services\GenericDataService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="State\Navigators\INavigator.cs" />
@@ -170,6 +182,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202311281734356_kekW.resx">
+      <DependentUpon>202311281734356_kekW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311281739480_kekW1.resx">
+      <DependentUpon>202311281739480_kekW1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202311281754575_kekW2.resx">
+      <DependentUpon>202311281754575_kekW2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

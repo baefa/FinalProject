@@ -11,7 +11,7 @@ using Z.EntityFramework.Plus;
 
 namespace FinalProject.Services
 {
-    public class GenericDataService<T> : IDataService<T> where T : ModelObject
+    public class GenericDataService<T> : IDataService<T> where T : class , IEntity
     {
         private readonly FinalProjectDbContext _context;
 

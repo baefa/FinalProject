@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Models
 {
-    public class Warehouse : ModelObject
+    public class Warehouse : IEntity
     {
+        public int Id { get; set; } 
         public string Name { get; set; }
         public string Address { get; set; }
+
+        public List<ProductReceive> productReceives { get; set; }
     }
 }
