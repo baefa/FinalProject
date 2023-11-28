@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FinalProject.Context;
+using FinalProject.Models;
 
 namespace FinalProject.Views
 {
@@ -22,29 +23,26 @@ namespace FinalProject.Views
     /// </summary>
     public partial class ProductView : UserControl
     {
+        public List<Product> Products { get; set; }
+
         public ProductView()
         {
             InitializeComponent();
             
-            using (var dbcontext= new FinalProjectDbContext())
+            using (FinalProjectDbContext dbContext = new FinalProjectDbContext())
             {
-                /*var products = from product in dbcontext.Products select product;
-                var productList = products
-                    .AsNoTracking()
-                    .OrderBy(c => c.Id)
-                    .Select(p => new
-                    {
-                        p.Id,
-                        p.Name,
-                        p.Category,
-                        p.Article,
-                        p.Cost
-                    }).ToList(); */
-                var productList = dbcontext.Products.ToList();
-                
-                ProductDataGrid.ItemsSource = productList;
-
+                Products = dbContext.Products.ToList();
             }
+
+            ProductDataGrid.ItemsSource = Products;
+
+            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Номер товара", Binding = new Binding("Id") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Наименование товара", Binding = new Binding("Name") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Вид товара", Binding = new Binding("Category") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Арктирук", Binding = new Binding("Article") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Производитель", Binding = new Binding("Producer") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Цена", Binding = new Binding("Cost") });
+
         }
     }
 }

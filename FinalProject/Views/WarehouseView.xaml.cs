@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FinalProject.Context;
+using FinalProject.Models;
 
 namespace FinalProject.Views
 {
@@ -20,9 +22,22 @@ namespace FinalProject.Views
     /// </summary>
     public partial class WarehouseView : UserControl
     {
+        public List<Warehouse> Warehouses { get; set; }
+
         public WarehouseView()
         {
             InitializeComponent();
+            
+            using (FinalProjectDbContext dbContext = new FinalProjectDbContext())
+            {
+                Warehouses = dbContext.Warehouses.ToList();
+            }
+
+            WarehousesDataGrid.ItemsSource = Warehouses;
+
+            WarehousesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Номер склада", Binding = new Binding("Id") });
+            WarehousesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Название", Binding = new Binding("Name") });
+            WarehousesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Адрес", Binding = new Binding("Address") });
         }
     }
 }

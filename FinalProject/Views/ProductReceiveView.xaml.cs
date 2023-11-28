@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FinalProject.Context;
+using FinalProject.Models;
 
 namespace FinalProject.Views
 {
@@ -22,11 +23,24 @@ namespace FinalProject.Views
     /// </summary>
     public partial class ProductReceiveView : UserControl
     {
+        public List<ProductReceive> ProductsReceive { get; set; }
+        public List<Supplier> Suppliers { get; set; }
         public ProductReceiveView()
         {
             InitializeComponent();
             
-            
+            using (FinalProjectDbContext _context = new FinalProjectDbContext())
+            {
+                ProductsReceive = _context.ProductReceives.ToList();
+            }
+
+            ProductReceivesDataGrid.ItemsSource = ProductsReceive;
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Номер поступления", Binding = new Binding("Id") });
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Поставщик", Binding = new Binding("Supplier") });
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Склад", Binding = new Binding("Warehouse") });
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Товар", Binding = new Binding("Product") });
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Кол-во товара", Binding = new Binding("Quantity") });
+            ProductReceivesDataGrid.Columns.Add(new DataGridTextColumn { Header = "Дата поступления", Binding = new Binding("DateOfReceive") });
         }
     }
 }

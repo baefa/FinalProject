@@ -1,7 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Data;
 using FinalProject.Context;
+using FinalProject.Models;
+using FinalProject.Services;
 
 namespace FinalProject.Views
 {
@@ -10,28 +14,24 @@ namespace FinalProject.Views
     /// </summary>
     public partial class ProducerView : UserControl
     {
+        public List<Producer> Producers { get; set; }
         public ProducerView()
         {
             InitializeComponent();
 
-            using (var dbcontext= new FinalProjectDbContext())
+            using (FinalProjectDbContext _context = new FinalProjectDbContext())
             {
-                var producers = from producer in dbcontext.Producers select producer;
-                
-                var producerList = producers
-                    .AsNoTracking()
-                    .OrderBy(c => c.Id)
-                    .Select(p =>new
-                    {
-                        p.Id ,
-                        p.Name,
-                        p.Address,
-                        p.Telephone,
-                        p.BankDetails
-                    }).ToList();
-                ProducerDataGrid.ItemsSource = producerList;
-
+                Producers = _context.Producers.ToList();
             }
+
+            ProducerDataGrid.ItemsSource = Producers;
+
+            ProducerDataGrid.Columns.Add(new DataGridTextColumn { Header = "Номер производителя", Binding = new Binding("Id") });
+            ProducerDataGrid.Columns.Add(new DataGridTextColumn { Header = "Название организации", Binding = new Binding("Name") });
+            ProducerDataGrid.Columns.Add(new DataGridTextColumn { Header = "Адрес", Binding = new Binding("Address") });
+            ProducerDataGrid.Columns.Add(new DataGridTextColumn { Header = "Телефон", Binding = new Binding("Telephone") });
+            ProducerDataGrid.Columns.Add(new DataGridTextColumn { Header = "Банковские реквизиты", Binding = new Binding("Name") });
+
         }
     }
 }
