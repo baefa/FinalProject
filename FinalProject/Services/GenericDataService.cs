@@ -20,26 +20,23 @@ namespace FinalProject.Services
             _context = context;
         }
 
-        public async Task<T> Create(T entity)
+        public async Task<T> Insert(T entity)
         {
            var createdResult = _context.Set<T>().Add(entity);
-           await _context.SaveChangesAsync();
+           await Save();
            
            return createdResult;
         }
 
         public async Task<bool> Delete(int Id)
         {
-            T entity = await _context.Set<T>().FirstOrDefaultAsync((e) => e.Id == Id);
+            var entity = await _context.Set<T>().FirstOrDefaultAsync((e) => e.Id == Id);
 
-            if (entity != null)
-            {
-                _context.Set<T>().Remove(entity);
-                await _context.SaveChangesAsync();
-                return true;
-            }
+            if (entity == null) return false;
+            _context.Set<T>().Remove(entity);
+            await Save();
+            return true;
 
-            return false;
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -50,7 +47,7 @@ namespace FinalProject.Services
 
         public async Task<T> GetById(int Id)
         {
-            T entity = await _context.Set<T>().FirstOrDefaultAsync((e) => e.Id == Id);
+            var entity = await _context.Set<T>().FirstOrDefaultAsync((e) => e.Id == Id);
             return entity;
         }
         public async Task<T> Update(int Id, T updatedEntity)
@@ -60,17 +57,21 @@ namespace FinalProject.Services
                 var entity = await context.Set<T>().FindAsync(Id);
 
                 if (entity == null) throw new InvalidOperationException($"Entity with id {Id} not found");
+                
                 foreach (var property in typeof(T).GetProperties())
                 {
                     if (property.Name == "Id") continue;
                     var newValue = property.GetValue(updatedEntity);
                     if (newValue != null) property.SetValue(entity, newValue);
                 }
-
-                await context.SaveChangesAsync();
-
                 return entity;
             }
+        }
+
+        public async Task<bool> Save()
+        {
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

@@ -10,8 +10,10 @@ namespace FinalProject.Services
     {
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(int Id);
-        Task<T> Create(T entity);
-        Task<T> Update(int Id, T entity);
+        Task<T> Insert(T entity);
         Task<bool> Delete(int Id);
+        Task<T> Update(int Id, T entity);
+        Task<bool> Save();
+
     }
 }

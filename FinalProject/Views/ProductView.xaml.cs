@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FinalProject.Context;
 
 namespace FinalProject.Views
 {
@@ -23,6 +25,26 @@ namespace FinalProject.Views
         public ProductView()
         {
             InitializeComponent();
+            
+            using (var dbcontext= new FinalProjectDbContext())
+            {
+                /*var products = from product in dbcontext.Products select product;
+                var productList = products
+                    .AsNoTracking()
+                    .OrderBy(c => c.Id)
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.Name,
+                        p.Category,
+                        p.Article,
+                        p.Cost
+                    }).ToList(); */
+                var productList = dbcontext.Products.ToList();
+                
+                ProductDataGrid.ItemsSource = productList;
+
+            }
         }
     }
 }

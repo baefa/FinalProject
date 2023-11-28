@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <RadioButton Grid.Column="0" Content="Прибывшие Продукты" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ProductReceive}"/>
+            <RadioButton Grid.Column="0" Content="Поступления товаров" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ProductReceive}"/>
             <RadioButton Grid.Column="1" Content="Продукты" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Product}"/>
             <RadioButton Grid.Column="2" Content="Производители" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Producer}"/>
             <RadioButton Grid.Column="3" Content="Поставщики" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Supplier}"/>
