@@ -79,6 +79,12 @@
     </ApplicationDefinition>
     <Compile Include="Commands\UpdateCurrentViewModelCommand.cs" />
     <Compile Include="Context\FinalProjectDbContext.cs" />
+    <Compile Include="Controls\CreateWindowProducer.xaml.cs">
+      <DependentUpon>CreateWindowProducer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditWindowProducer.xaml.cs">
+      <DependentUpon>EditWindowProducer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
@@ -122,6 +128,14 @@
     <Compile Include="Views\WarehouseView.xaml.cs">
       <DependentUpon>WarehouseView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\CreateWindowProducer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EditWindowProducer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\NavigationBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

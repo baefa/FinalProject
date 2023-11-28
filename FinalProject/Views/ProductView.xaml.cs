@@ -40,7 +40,7 @@ namespace FinalProject.Views
             ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Наименование товара", Binding = new Binding("Name") });
             ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Вид товара", Binding = new Binding("Category") });
             ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Арктирук", Binding = new Binding("Article") });
-            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Производитель", Binding = new Binding("Producer") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Производитель", Binding = new Binding("ProducerId") });
             ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Цена", Binding = new Binding("Cost") });
 
         }

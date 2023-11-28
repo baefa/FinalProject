@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FinalProject.Context;
+using FinalProject.Controls;
 using FinalProject.Models;
 
 namespace FinalProject.Views
@@ -42,6 +43,11 @@ namespace FinalProject.Views
             SuppliersDataGrid.Columns.Add(new DataGridTextColumn { Header = "Телефон", Binding = new Binding("Telephone") });
             SuppliersDataGrid.Columns.Add(new DataGridTextColumn { Header = "Банковские реквизиты", Binding = new Binding("BankDetails") });
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new MainWindow();
         }
     }
 }
