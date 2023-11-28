@@ -15,11 +15,12 @@ namespace ConsoleApp3
         {
             using (var dbContext = new FinalProjectDbContext())
             {
+
                 try
                 {
                     IDataService<Producer> producerService = new GenericDataService<Producer>(dbContext);
-                    await producerService.Update(2, new Producer() { Name = "Ye" }); 
-                    Console.ReadLine();
+                    await producerService.Update(2, new Producer() { Telephone = "Azb" });
+                    await dbContext.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {

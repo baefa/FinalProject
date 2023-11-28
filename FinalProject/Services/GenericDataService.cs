@@ -55,34 +55,21 @@ namespace FinalProject.Services
         }
         public async Task<T> Update(int Id, T updatedEntity)
         {
-            try
+            using (var context = new FinalProjectDbContext())
             {
-                using (var context = new FinalProjectDbContext())
+                var entity = await context.Set<T>().FindAsync(Id);
+
+                if (entity == null) throw new InvalidOperationException($"Entity with id {Id} not found");
+                foreach (var property in typeof(T).GetProperties())
                 {
-                    var existingEntity = await context.Set<T>().FindAsync(Id);
-
-                    if (existingEntity != null)
-                    {
-                        foreach (var property in typeof(T).GetProperties())
-                        {
-                            if (property.Name != "Id")
-                            {
-                                var newValue = property.GetValue(updatedEntity);
-                                property.SetValue(existingEntity, newValue);
-                            }
-                        }
-
-                        await context.SaveChangesAsync();
-
-                        return existingEntity;
-                    }
-                        throw new InvalidOperationException($"Entity with id {Id} not found");
+                    if (property.Name == "Id") continue;
+                    var newValue = property.GetValue(updatedEntity);
+                    if (newValue != null) property.SetValue(entity, newValue);
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while updating the entity: {ex.Message}");
-                throw;
+
+                await context.SaveChangesAsync();
+
+                return entity;
             }
         }
     }

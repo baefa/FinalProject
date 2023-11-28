@@ -1,9 +1,36 @@
 ﻿<Application x:Class="FinalProject.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:FinalProject"
-             StartupUri="MainWindow.xaml">
+             xmlns:viewmodels="clr-namespace:FinalProject.ViewModels"
+             xmlns:views ="clr-namespace:FinalProject.Views"
+             xmlns:local="clr-namespace:FinalProject">
     <Application.Resources>
-         
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewmodels:ProductReceivesViewModel}">
+                <views:ProductReceiveView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ProducerViewModel}">
+                <views:ProducerView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ProductViewModel}">
+                <views:ProductView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:SupplierViewModel}">
+                <views:SupplierView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:WareHouseViewModel}">
+                <views:WarehouseView/>
+            </DataTemplate>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
