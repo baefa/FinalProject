@@ -21,11 +21,11 @@ namespace FinalProject.Controls
     /// <summary>
     /// Логика взаимодействия для CreateWindowProducer.xaml
     /// </summary>
-    public partial class CreateWindowProducer : Window
+    public partial class ProducerCreateWindow : Window
     {
-        private FinalProjectDbContext _context = new FinalProjectDbContext();
-        private ProducerView _producerView;
-        public CreateWindowProducer(ProducerView producerView)
+        private readonly FinalProjectDbContext _context = new FinalProjectDbContext();
+        private readonly ProducerView _producerView;
+        public ProducerCreateWindow(ProducerView producerView)
         {
             InitializeComponent();
             _producerView = producerView;
@@ -35,7 +35,7 @@ namespace FinalProject.Controls
         {
             try
             {
-                Producer newProducer = new Producer()
+                Producer newProducer = new Producer
                 {
                     Name = NameProducerInput.Text,
                     Address = AddressProducerInput.Text,

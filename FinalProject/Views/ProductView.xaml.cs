@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FinalProject.Context;
+using FinalProject.Controls.CreateWindow;
+using FinalProject.Controls.EditWindow;
 using FinalProject.Models;
 
 namespace FinalProject.Views
@@ -28,21 +21,74 @@ namespace FinalProject.Views
         public ProductView()
         {
             InitializeComponent();
-            
-            using (FinalProjectDbContext dbContext = new FinalProjectDbContext())
+
+            using (var dbContext = new FinalProjectDbContext())
             {
                 Products = dbContext.Products.ToList();
             }
 
             ProductDataGrid.ItemsSource = Products;
 
-            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Номер товара", Binding = new Binding("Id") });
-            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Наименование товара", Binding = new Binding("Name") });
-            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Вид товара", Binding = new Binding("Category") });
-            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Арктирук", Binding = new Binding("Article") });
-            ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Производитель", Binding = new Binding("ProducerId") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn
+                { Header = "Номер товара", Binding = new Binding("Id") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn
+                { Header = "Наименование товара", Binding = new Binding("Name") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn
+                { Header = "Вид товара", Binding = new Binding("Category") });
+            ProductDataGrid.Columns.Add(
+                new DataGridTextColumn { Header = "Арктирук", Binding = new Binding("Article") });
+            ProductDataGrid.Columns.Add(new DataGridTextColumn
+                { Header = "Производитель", Binding = new Binding("ProducerId") });
             ProductDataGrid.Columns.Add(new DataGridTextColumn { Header = "Цена", Binding = new Binding("Cost") });
+        }
 
+        private void CreateButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var createWindow = new ProductCreateWindow(this);
+            createWindow.Show();
+        }
+
+        private async void DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (ProductDataGrid.SelectedItem is Product selectedProduct)
+            {
+                using (var context = new FinalProjectDbContext())
+                {
+                    context.Products.Attach(selectedProduct);
+                    context.Products.Remove(selectedProduct);
+                    await context.SaveChangesAsync();
+                    Products = await context.Products.ToListAsync();
+                    ProductDataGrid.ItemsSource = Products;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите строку для удаления!");
+            }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProductDataGrid.SelectedItem is Product selectedProducer)
+            {
+                var editWindow = new ProductEditWindow(selectedProducer);
+                editWindow.ShowDialog();
+
+                if (!editWindow.IsSaved) return;
+
+                using (var context = new FinalProjectDbContext())
+                {
+                    context.Entry(selectedProducer).State = EntityState.Modified;
+                    context.SaveChanges();
+
+                    Products = context.Products.ToList();
+                    ProductDataGrid.ItemsSource = Products;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите строку для изменения!");
+            }
         }
     }
 }

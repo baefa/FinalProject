@@ -17,6 +17,6 @@ namespace FinalProject.Models
         public int ProducerId { get; set; }
         public Producer Producer { get; set; }
 
-        public List<ProductReceive> productReceives { get; set; }
+        public List<ProductReceive> ProductReceives { get; set; }
     }
 }

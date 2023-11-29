@@ -13,7 +13,7 @@ namespace FinalProject.Commands
     {
         public event EventHandler CanExecuteChanged;
 
-        private INavigator _navigator;
+        private readonly INavigator _navigator;
 
         public UpdateCurrentViewModelCommand(INavigator navigator)
         {
@@ -27,27 +27,26 @@ namespace FinalProject.Commands
 
         public void Execute(object parameter)
         {
-            if(parameter is ViewType)
+            if (!(parameter is ViewType viewType)) return;
+            switch (viewType)
             {
-                ViewType viewType = (ViewType)parameter;
-                switch (viewType)
-                {
-                    case ViewType.ProductReceive:
-                        _navigator.CurrentViewModel = new ProductReceivesViewModel();
-                        break;
-                    case ViewType.Product:
-                        _navigator.CurrentViewModel = new ProductViewModel();
-                        break;
-                    case ViewType.Producer:
-                        _navigator.CurrentViewModel = new ProducerViewModel();
-                        break;
-                    case ViewType.Supplier:
-                        _navigator.CurrentViewModel = new SupplierViewModel();
-                        break;
-                    case ViewType.Warehouse:
-                        _navigator.CurrentViewModel = new WareHouseViewModel();
-                        break;
-                }
+                case ViewType.ProductReceive:
+                    _navigator.CurrentViewModel = new ProductReceivesViewModel();
+                    break;
+                case ViewType.Product:
+                    _navigator.CurrentViewModel = new ProductViewModel();
+                    break;
+                case ViewType.Producer:
+                    _navigator.CurrentViewModel = new ProducerViewModel();
+                    break;
+                case ViewType.Supplier:
+                    _navigator.CurrentViewModel = new SupplierViewModel();
+                    break;
+                case ViewType.Warehouse:
+                    _navigator.CurrentViewModel = new WareHouseViewModel();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

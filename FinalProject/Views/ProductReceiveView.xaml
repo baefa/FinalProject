@@ -10,8 +10,5 @@
         <TextBlock Text="ProductReceives"/>
         <DataGrid Name="ProductReceivesDataGrid" AutoGenerateColumns="False" Margin="10,50,10,10" ItemsSource="{Binding ProductReceivesItemsSource}">
         </DataGrid>
-        <Button Content="Создать" HorizontalAlignment="Left" Margin="17,25,0,0" VerticalAlignment="Top" Width="auto"/>
-        <Button Content="Удалить" HorizontalAlignment="Left" Margin="75,25,0,0" VerticalAlignment="Top" Width="auto"/>
-        <Button Content="Изменить" HorizontalAlignment="Left" Margin="135,25,0,0" VerticalAlignment="Top" Width="auto"/>
     </Grid>
 </UserControl>

@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using FinalProject.Context;
 using FinalProject.Controls;
+using FinalProject.Controls.EditWindow;
 using FinalProject.Models;
 using FinalProject.Services;
 
@@ -38,7 +39,7 @@ namespace FinalProject.Views
         }
         private void CreateButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            CreateWindowProducer createWindow = new CreateWindowProducer(this);
+            ProducerCreateWindow createWindow = new ProducerCreateWindow(this);
             createWindow.Show();
         }
 
@@ -71,7 +72,7 @@ namespace FinalProject.Views
 
             if (selectedProducer != null)
             {
-                EditWindowProducer editWindow = new EditWindowProducer(selectedProducer);
+                ProducerEditWindow editWindow = new ProducerEditWindow(selectedProducer);
                 editWindow.ShowDialog();
 
                 if (editWindow.IsSaved)
