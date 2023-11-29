@@ -11,7 +11,7 @@ namespace FinalProject.Controls.CreateWindow
     {
         private readonly FinalProjectDbContext _context = new FinalProjectDbContext();
         private readonly ProductReceiveView _productReceiveView;
-        
+
         public ProductReceiveCreateWindow(ProductReceiveView productReceiveViewView)
         {
             InitializeComponent();
@@ -24,8 +24,12 @@ namespace FinalProject.Controls.CreateWindow
             {
                 var newProductReceive = new ProductReceive
                 {
-                
+                    Quantity = Convert.ToInt32(Quantity.Text),
+                    ProductId = Convert.ToInt32(ProductId.Text),
+                    SupplierId = Convert.ToInt32(SupplierId.Text),
+                    WarehouseId = Convert.ToInt32(WarehouseId.Text)
                 };
+
                 _context.ProductReceives.Add(newProductReceive);
                 await _context.SaveChangesAsync();
 
@@ -34,11 +38,13 @@ namespace FinalProject.Controls.CreateWindow
                     _productReceiveView.ProductsReceive = await _context.ProductReceives.ToListAsync();
                     _productReceiveView.ProductReceivesDataGrid.ItemsSource = _productReceiveView.ProductsReceive;
                 }
+
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Произошла ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Произошла ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
     }

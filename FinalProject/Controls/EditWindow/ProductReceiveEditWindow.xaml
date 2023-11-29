@@ -5,8 +5,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:FinalProject.Controls.EditWindow"
         mc:Ignorable="d"
-        Title="ProductReceiveEditWindow" Height="450" Width="800">
+        Title="Изменение поступления товара" Height="250" Width="250">
     <Grid>
-        
+        <TextBlock x:Name="Quantity" HorizontalAlignment="Left" Margin="20,24,0,0" TextWrapping="Wrap"
+                   Text="Кол-во товара" VerticalAlignment="Top" />
+        <TextBlock x:Name="ProductId" HorizontalAlignment="Left" Margin="27,56,0,0" TextWrapping="Wrap"
+                   Text="Товар" VerticalAlignment="Top" />
+        <TextBlock x:Name="SupplierId" HorizontalAlignment="Left" Margin="27,88,0,0" TextWrapping="Wrap"
+                   Text="Поставщик" VerticalAlignment="Top" />
+        <TextBlock x:Name="WarehouseId" HorizontalAlignment="Left" Margin="27,120,0,0" TextWrapping="Wrap"
+                   Text="Склад" VerticalAlignment="Top" />
+        <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="102,24,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="ProductIdInput" HorizontalAlignment="Left" Margin="102,55,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="SupplierIdInput" HorizontalAlignment="Left" Margin="102,88,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="WarehouseIdInput" HorizontalAlignment="Left" Margin="102,120,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" />
+        <Button Content="Создать" HorizontalAlignment="Center" Margin="0,182,0,0"
+                VerticalAlignment="Top" Click="SaveButton_Click" />
     </Grid>
 </Window>

@@ -12,7 +12,7 @@ namespace FinalProject.Models
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public SqlDateTime DateOfReceive { get; set; }
+        public DateTime DateOfReceive { get; set; }
 
         public int SupplierId {  get; set; } 
         public Supplier Supplier { get; set; }
